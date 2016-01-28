@@ -36,7 +36,7 @@
     CGContextAddLineToPoint(context, leftEndPoint.x - leftExtendDistance, leftEndPoint.y);
     
     CGPoint leftCornerPoint = CGPointMake(leftEndPoint.x - leftExtendDistance - cornerRadius, leftEndPoint.y);
-    // 左边矩形圆弧corner
+    // 矩形左上角圆弧corner
     CGContextAddArcToPoint(context, leftCornerPoint.x, leftCornerPoint.y, leftCornerPoint.x, leftCornerPoint.y + cornerRadius, cornerRadius);
     
     // 矩形左边向下延伸
@@ -53,7 +53,7 @@
     CGContextAddLineToPoint(context, rightEndPoint.x + rightExtendDistance, rightEndPoint.y);
 
     CGPoint rightCornerPoint = CGPointMake(rightEndPoint.x + rightExtendDistance + cornerRadius, rightEndPoint.y);
-    // 右边矩形圆弧corner
+    // 矩形右上角圆弧corner
     CGContextAddArcToPoint(context, rightCornerPoint.x, rightCornerPoint.y, rightCornerPoint.x, rightCornerPoint.y + cornerRadius, cornerRadius);
     
     // 矩形右边向下延伸
