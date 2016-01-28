@@ -1,0 +1,543 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		EFDCE53A1C59F48F005BA79C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EFDCE5391C59F48F005BA79C /* main.m */; };
+		EFDCE53D1C59F48F005BA79C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EFDCE53C1C59F48F005BA79C /* AppDelegate.m */; };
+		EFDCE5401C59F48F005BA79C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EFDCE53F1C59F48F005BA79C /* ViewController.m */; };
+		EFDCE5431C59F48F005BA79C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EFDCE5411C59F48F005BA79C /* Main.storyboard */; };
+		EFDCE5451C59F48F005BA79C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EFDCE5441C59F48F005BA79C /* Assets.xcassets */; };
+		EFDCE5481C59F48F005BA79C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EFDCE5461C59F48F005BA79C /* LaunchScreen.storyboard */; };
+		EFDCE5531C59F48F005BA79C /* ZGPopUpViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EFDCE5521C59F48F005BA79C /* ZGPopUpViewTests.m */; };
+		EFDCE55E1C59F48F005BA79C /* ZGPopUpViewUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = EFDCE55D1C59F48F005BA79C /* ZGPopUpViewUITests.m */; };
+		EFDCE56F1C59F4BC005BA79C /* ZGPopUpView.m in Sources */ = {isa = PBXBuildFile; fileRef = EFDCE56E1C59F4BC005BA79C /* ZGPopUpView.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		EFDCE54F1C59F48F005BA79C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EFDCE52D1C59F48F005BA79C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EFDCE5341C59F48F005BA79C;
+			remoteInfo = ZGPopUpView;
+		};
+		EFDCE55A1C59F48F005BA79C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EFDCE52D1C59F48F005BA79C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EFDCE5341C59F48F005BA79C;
+			remoteInfo = ZGPopUpView;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		EFDCE5351C59F48F005BA79C /* ZGPopUpView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZGPopUpView.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		EFDCE5391C59F48F005BA79C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		EFDCE53B1C59F48F005BA79C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		EFDCE53C1C59F48F005BA79C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		EFDCE53E1C59F48F005BA79C /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		EFDCE53F1C59F48F005BA79C /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		EFDCE5421C59F48F005BA79C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		EFDCE5441C59F48F005BA79C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		EFDCE5471C59F48F005BA79C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		EFDCE5491C59F48F005BA79C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EFDCE54E1C59F48F005BA79C /* ZGPopUpViewTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ZGPopUpViewTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		EFDCE5521C59F48F005BA79C /* ZGPopUpViewTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZGPopUpViewTests.m; sourceTree = "<group>"; };
+		EFDCE5541C59F48F005BA79C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EFDCE5591C59F48F005BA79C /* ZGPopUpViewUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ZGPopUpViewUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		EFDCE55D1C59F48F005BA79C /* ZGPopUpViewUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZGPopUpViewUITests.m; sourceTree = "<group>"; };
+		EFDCE55F1C59F48F005BA79C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EFDCE56D1C59F4BC005BA79C /* ZGPopUpView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZGPopUpView.h; sourceTree = "<group>"; };
+		EFDCE56E1C59F4BC005BA79C /* ZGPopUpView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZGPopUpView.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		EFDCE5321C59F48F005BA79C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EFDCE54B1C59F48F005BA79C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EFDCE5561C59F48F005BA79C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		EFDCE52C1C59F48F005BA79C = {
+			isa = PBXGroup;
+			children = (
+				EFDCE5371C59F48F005BA79C /* ZGPopUpView */,
+				EFDCE5511C59F48F005BA79C /* ZGPopUpViewTests */,
+				EFDCE55C1C59F48F005BA79C /* ZGPopUpViewUITests */,
+				EFDCE5361C59F48F005BA79C /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		EFDCE5361C59F48F005BA79C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EFDCE5351C59F48F005BA79C /* ZGPopUpView.app */,
+				EFDCE54E1C59F48F005BA79C /* ZGPopUpViewTests.xctest */,
+				EFDCE5591C59F48F005BA79C /* ZGPopUpViewUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		EFDCE5371C59F48F005BA79C /* ZGPopUpView */ = {
+			isa = PBXGroup;
+			children = (
+				EFDCE56B1C59F4B0005BA79C /* ZGPopUpView */,
+				EFDCE53B1C59F48F005BA79C /* AppDelegate.h */,
+				EFDCE53C1C59F48F005BA79C /* AppDelegate.m */,
+				EFDCE53E1C59F48F005BA79C /* ViewController.h */,
+				EFDCE53F1C59F48F005BA79C /* ViewController.m */,
+				EFDCE5411C59F48F005BA79C /* Main.storyboard */,
+				EFDCE5441C59F48F005BA79C /* Assets.xcassets */,
+				EFDCE5461C59F48F005BA79C /* LaunchScreen.storyboard */,
+				EFDCE5491C59F48F005BA79C /* Info.plist */,
+				EFDCE5381C59F48F005BA79C /* Supporting Files */,
+			);
+			path = ZGPopUpView;
+			sourceTree = "<group>";
+		};
+		EFDCE5381C59F48F005BA79C /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				EFDCE5391C59F48F005BA79C /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		EFDCE5511C59F48F005BA79C /* ZGPopUpViewTests */ = {
+			isa = PBXGroup;
+			children = (
+				EFDCE5521C59F48F005BA79C /* ZGPopUpViewTests.m */,
+				EFDCE5541C59F48F005BA79C /* Info.plist */,
+			);
+			path = ZGPopUpViewTests;
+			sourceTree = "<group>";
+		};
+		EFDCE55C1C59F48F005BA79C /* ZGPopUpViewUITests */ = {
+			isa = PBXGroup;
+			children = (
+				EFDCE55D1C59F48F005BA79C /* ZGPopUpViewUITests.m */,
+				EFDCE55F1C59F48F005BA79C /* Info.plist */,
+			);
+			path = ZGPopUpViewUITests;
+			sourceTree = "<group>";
+		};
+		EFDCE56B1C59F4B0005BA79C /* ZGPopUpView */ = {
+			isa = PBXGroup;
+			children = (
+				EFDCE56C1C59F4B0005BA79C /* View */,
+			);
+			path = ZGPopUpView;
+			sourceTree = "<group>";
+		};
+		EFDCE56C1C59F4B0005BA79C /* View */ = {
+			isa = PBXGroup;
+			children = (
+				EFDCE56D1C59F4BC005BA79C /* ZGPopUpView.h */,
+				EFDCE56E1C59F4BC005BA79C /* ZGPopUpView.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		EFDCE5341C59F48F005BA79C /* ZGPopUpView */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EFDCE5621C59F48F005BA79C /* Build configuration list for PBXNativeTarget "ZGPopUpView" */;
+			buildPhases = (
+				EFDCE5311C59F48F005BA79C /* Sources */,
+				EFDCE5321C59F48F005BA79C /* Frameworks */,
+				EFDCE5331C59F48F005BA79C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ZGPopUpView;
+			productName = ZGPopUpView;
+			productReference = EFDCE5351C59F48F005BA79C /* ZGPopUpView.app */;
+			productType = "com.apple.product-type.application";
+		};
+		EFDCE54D1C59F48F005BA79C /* ZGPopUpViewTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EFDCE5651C59F48F005BA79C /* Build configuration list for PBXNativeTarget "ZGPopUpViewTests" */;
+			buildPhases = (
+				EFDCE54A1C59F48F005BA79C /* Sources */,
+				EFDCE54B1C59F48F005BA79C /* Frameworks */,
+				EFDCE54C1C59F48F005BA79C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				EFDCE5501C59F48F005BA79C /* PBXTargetDependency */,
+			);
+			name = ZGPopUpViewTests;
+			productName = ZGPopUpViewTests;
+			productReference = EFDCE54E1C59F48F005BA79C /* ZGPopUpViewTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		EFDCE5581C59F48F005BA79C /* ZGPopUpViewUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EFDCE5681C59F48F005BA79C /* Build configuration list for PBXNativeTarget "ZGPopUpViewUITests" */;
+			buildPhases = (
+				EFDCE5551C59F48F005BA79C /* Sources */,
+				EFDCE5561C59F48F005BA79C /* Frameworks */,
+				EFDCE5571C59F48F005BA79C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				EFDCE55B1C59F48F005BA79C /* PBXTargetDependency */,
+			);
+			name = ZGPopUpViewUITests;
+			productName = ZGPopUpViewUITests;
+			productReference = EFDCE5591C59F48F005BA79C /* ZGPopUpViewUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		EFDCE52D1C59F48F005BA79C /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0720;
+				ORGANIZATIONNAME = Zong;
+				TargetAttributes = {
+					EFDCE5341C59F48F005BA79C = {
+						CreatedOnToolsVersion = 7.2;
+					};
+					EFDCE54D1C59F48F005BA79C = {
+						CreatedOnToolsVersion = 7.2;
+						TestTargetID = EFDCE5341C59F48F005BA79C;
+					};
+					EFDCE5581C59F48F005BA79C = {
+						CreatedOnToolsVersion = 7.2;
+						TestTargetID = EFDCE5341C59F48F005BA79C;
+					};
+				};
+			};
+			buildConfigurationList = EFDCE5301C59F48F005BA79C /* Build configuration list for PBXProject "ZGPopUpView" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = EFDCE52C1C59F48F005BA79C;
+			productRefGroup = EFDCE5361C59F48F005BA79C /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				EFDCE5341C59F48F005BA79C /* ZGPopUpView */,
+				EFDCE54D1C59F48F005BA79C /* ZGPopUpViewTests */,
+				EFDCE5581C59F48F005BA79C /* ZGPopUpViewUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		EFDCE5331C59F48F005BA79C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EFDCE5481C59F48F005BA79C /* LaunchScreen.storyboard in Resources */,
+				EFDCE5451C59F48F005BA79C /* Assets.xcassets in Resources */,
+				EFDCE5431C59F48F005BA79C /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EFDCE54C1C59F48F005BA79C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EFDCE5571C59F48F005BA79C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		EFDCE5311C59F48F005BA79C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EFDCE56F1C59F4BC005BA79C /* ZGPopUpView.m in Sources */,
+				EFDCE5401C59F48F005BA79C /* ViewController.m in Sources */,
+				EFDCE53D1C59F48F005BA79C /* AppDelegate.m in Sources */,
+				EFDCE53A1C59F48F005BA79C /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EFDCE54A1C59F48F005BA79C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EFDCE5531C59F48F005BA79C /* ZGPopUpViewTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EFDCE5551C59F48F005BA79C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EFDCE55E1C59F48F005BA79C /* ZGPopUpViewUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		EFDCE5501C59F48F005BA79C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = EFDCE5341C59F48F005BA79C /* ZGPopUpView */;
+			targetProxy = EFDCE54F1C59F48F005BA79C /* PBXContainerItemProxy */;
+		};
+		EFDCE55B1C59F48F005BA79C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = EFDCE5341C59F48F005BA79C /* ZGPopUpView */;
+			targetProxy = EFDCE55A1C59F48F005BA79C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		EFDCE5411C59F48F005BA79C /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EFDCE5421C59F48F005BA79C /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		EFDCE5461C59F48F005BA79C /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EFDCE5471C59F48F005BA79C /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		EFDCE5601C59F48F005BA79C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		EFDCE5611C59F48F005BA79C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		EFDCE5631C59F48F005BA79C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = ZGPopUpView/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.Zong.ZGPopUpView;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		EFDCE5641C59F48F005BA79C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = ZGPopUpView/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.Zong.ZGPopUpView;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		EFDCE5661C59F48F005BA79C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = ZGPopUpViewTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.Zong.ZGPopUpViewTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ZGPopUpView.app/ZGPopUpView";
+			};
+			name = Debug;
+		};
+		EFDCE5671C59F48F005BA79C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = ZGPopUpViewTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.Zong.ZGPopUpViewTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ZGPopUpView.app/ZGPopUpView";
+			};
+			name = Release;
+		};
+		EFDCE5691C59F48F005BA79C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = ZGPopUpViewUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.Zong.ZGPopUpViewUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = ZGPopUpView;
+				USES_XCTRUNNER = YES;
+			};
+			name = Debug;
+		};
+		EFDCE56A1C59F48F005BA79C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = ZGPopUpViewUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.Zong.ZGPopUpViewUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = ZGPopUpView;
+				USES_XCTRUNNER = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		EFDCE5301C59F48F005BA79C /* Build configuration list for PBXProject "ZGPopUpView" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EFDCE5601C59F48F005BA79C /* Debug */,
+				EFDCE5611C59F48F005BA79C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EFDCE5621C59F48F005BA79C /* Build configuration list for PBXNativeTarget "ZGPopUpView" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EFDCE5631C59F48F005BA79C /* Debug */,
+				EFDCE5641C59F48F005BA79C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		EFDCE5651C59F48F005BA79C /* Build configuration list for PBXNativeTarget "ZGPopUpViewTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EFDCE5661C59F48F005BA79C /* Debug */,
+				EFDCE5671C59F48F005BA79C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		EFDCE5681C59F48F005BA79C /* Build configuration list for PBXNativeTarget "ZGPopUpViewUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EFDCE5691C59F48F005BA79C /* Debug */,
+				EFDCE56A1C59F48F005BA79C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = EFDCE52D1C59F48F005BA79C /* Project object */;
+}
