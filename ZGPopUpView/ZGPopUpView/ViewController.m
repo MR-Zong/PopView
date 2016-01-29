@@ -18,8 +18,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-    self.view.backgroundColor = [UIColor blackColor];
-    NSString *message = @"宗根徐";
+//    self.view.backgroundColor = [UIColor blackColor];
+    NSString *message = @"宗根徐宗根徐宗根徐宗根徐宗根徐宗根徐宗根徐宗根徐宗根徐宗根徐宗根徐";
     [ZGPopUpView showMessage:message inView:self.view rect:CGRectMake(100, 100, 100, 100)];
     
 }

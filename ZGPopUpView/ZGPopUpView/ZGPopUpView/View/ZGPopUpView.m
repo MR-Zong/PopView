@@ -109,8 +109,6 @@ static CGFloat popUpViewLeftInset = 3;
     CGPoint startPoint = CGPointMake(rectSize.width - arrowRadius - cornerRadius - rightExtendDistance -popUpViewLeftInset , 0);
     CGPoint leftEndPoint = CGPointMake(startPoint.x - arrowSize.width, startPoint.y + arrowSize.height);
     CGPoint leftMidPoint =CGPointMake(startPoint.x, leftEndPoint.y);
-    CGPoint rightEndPoint = CGPointMake(startPoint.x + arrowSize.width, startPoint.y + arrowSize.height);
-    CGPoint rightMidPoint =CGPointMake(startPoint.x, rightEndPoint.y);
     
     
     // 箭头左边弧线
@@ -131,26 +129,34 @@ static CGFloat popUpViewLeftInset = 3;
     CGContextAddArcToPoint(context, leftCornerPoint.x, leftCornerPoint.y + rectSize.height, leftCornerPoint.x + cornerRadius, leftCornerPoint.y + rectSize.height, cornerRadius);
     
     
-    // 箭头右边弧线
-    CGContextMoveToPoint(context,startPoint.x,startPoint.y);//圆弧的起始点
-    CGContextAddArcToPoint(context, rightMidPoint.x, rightMidPoint.y, rightEndPoint.x, rightEndPoint.y, arrowRadius);
-    // 向右延伸直线
-    CGContextAddLineToPoint(context, rightEndPoint.x + rightExtendDistance, rightEndPoint.y);
     
-    CGPoint rightCornerPoint = CGPointMake(rightEndPoint.x + rightExtendDistance + cornerRadius, rightEndPoint.y);
-    // 矩形右上角圆弧corner
-    CGContextAddArcToPoint(context, rightCornerPoint.x, rightCornerPoint.y, rightCornerPoint.x, rightCornerPoint.y + cornerRadius, cornerRadius);
+    CGPoint rightCornerPoint = CGPointMake(startPoint.x + arrowRadius + rightExtendDistance + cornerRadius, leftCornerPoint.y);
     
-    // 矩形右边向下延伸
-    CGContextAddLineToPoint(context, rightCornerPoint.x, rightCornerPoint.y + cornerRadius + (rectSize.height - 2*cornerRadius));
+    // 延伸矩形底边
+    CGContextAddLineToPoint(context, rightCornerPoint.x - cornerRadius, rightCornerPoint.y + rectSize.height);
     
-    // 矩形右下角corner
-    CGContextAddArcToPoint(context, rightCornerPoint.x, rightCornerPoint.y + rectSize.height, rightCornerPoint.x - cornerRadius, rightCornerPoint.y + rectSize.height, cornerRadius);
+    // 矩形右下角
+    CGContextAddArcToPoint(context, rightCornerPoint.x, rightCornerPoint.y + rectSize.height, rightCornerPoint.x, rightCornerPoint.y + rectSize.height - cornerRadius, cornerRadius);
     
+    // 延伸矩形右边线
+    CGContextAddLineToPoint(context, rightCornerPoint.x, rightCornerPoint.y + cornerRadius);
+    
+    // 矩形右上角
+    CGContextAddArcToPoint(context, rightCornerPoint.x, rightCornerPoint.y, rightCornerPoint.x - cornerRadius, rightCornerPoint.y, cornerRadius);
+    
+    // 延伸arrow右边延伸
+    CGContextAddLineToPoint(context, rightCornerPoint.x - cornerRadius - rightExtendDistance, rightCornerPoint.y);
+    
+    // arrow右边弧形
+    CGContextAddArcToPoint(context, startPoint.x , rightCornerPoint.y, startPoint.x, startPoint.y, arrowRadius);
+
     // 封闭矩形
-    CGContextAddLineToPoint(context, leftCornerPoint.x + cornerRadius, leftCornerPoint.y + rectSize.height);
+    CGContextClosePath(context);
     
-    CGContextStrokePath(context);
+//    CGContextClip(context);
+    
+    CGContextDrawPath(context, kCGPathEOFillStroke);
+
     
     [super drawRect:rect];
 }
