@@ -16,7 +16,6 @@
 		EFDCE5531C59F48F005BA79C /* ZGPopUpViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EFDCE5521C59F48F005BA79C /* ZGPopUpViewTests.m */; };
 		EFDCE55E1C59F48F005BA79C /* ZGPopUpViewUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = EFDCE55D1C59F48F005BA79C /* ZGPopUpViewUITests.m */; };
 		EFDCE56F1C59F4BC005BA79C /* ZGPopUpView.m in Sources */ = {isa = PBXBuildFile; fileRef = EFDCE56E1C59F4BC005BA79C /* ZGPopUpView.m */; };
-		EFDCE5721C5A10F1005BA79C /* ZGTestDrawView.m in Sources */ = {isa = PBXBuildFile; fileRef = EFDCE5711C5A10F1005BA79C /* ZGTestDrawView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,8 +54,6 @@
 		EFDCE55F1C59F48F005BA79C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EFDCE56D1C59F4BC005BA79C /* ZGPopUpView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZGPopUpView.h; sourceTree = "<group>"; };
 		EFDCE56E1C59F4BC005BA79C /* ZGPopUpView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZGPopUpView.m; sourceTree = "<group>"; };
-		EFDCE5701C5A10F1005BA79C /* ZGTestDrawView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZGTestDrawView.h; sourceTree = "<group>"; };
-		EFDCE5711C5A10F1005BA79C /* ZGTestDrawView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZGTestDrawView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -160,8 +157,6 @@
 			children = (
 				EFDCE56D1C59F4BC005BA79C /* ZGPopUpView.h */,
 				EFDCE56E1C59F4BC005BA79C /* ZGPopUpView.m */,
-				EFDCE5701C5A10F1005BA79C /* ZGTestDrawView.h */,
-				EFDCE5711C5A10F1005BA79C /* ZGTestDrawView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -297,7 +292,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				EFDCE56F1C59F4BC005BA79C /* ZGPopUpView.m in Sources */,
-				EFDCE5721C5A10F1005BA79C /* ZGTestDrawView.m in Sources */,
 				EFDCE5401C59F48F005BA79C /* ViewController.m in Sources */,
 				EFDCE53D1C59F48F005BA79C /* AppDelegate.m in Sources */,
 				EFDCE53A1C59F48F005BA79C /* main.m in Sources */,
@@ -526,6 +520,7 @@
 				EFDCE5641C59F48F005BA79C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		EFDCE5651C59F48F005BA79C /* Build configuration list for PBXNativeTarget "ZGPopUpViewTests" */ = {
 			isa = XCConfigurationList;
@@ -534,6 +529,7 @@
 				EFDCE5671C59F48F005BA79C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		EFDCE5681C59F48F005BA79C /* Build configuration list for PBXNativeTarget "ZGPopUpViewUITests" */ = {
 			isa = XCConfigurationList;
@@ -542,6 +538,7 @@
 				EFDCE56A1C59F48F005BA79C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

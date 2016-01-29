@@ -8,7 +8,6 @@
 
 #import "ViewController.h"
 #import "ZGPopUpView.h"
-#import "ZGTestDrawView.h"
 
 @interface ViewController ()
 
@@ -19,13 +18,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-    NSString *message = @"块过年了，好像回家";
-//    [ZGPopUpView showMessage:message inView:self.view rect:CGRectMake(100, 100, 100, 100)];
-    
-    ZGTestDrawView *drawView = [[ZGTestDrawView alloc] init];
-    drawView.frame = self.view.bounds;
-    
-    [self.view addSubview:drawView];
+    self.view.backgroundColor = [UIColor blackColor];
+    NSString *message = @"宗根徐";
+    [ZGPopUpView showMessage:message inView:self.view rect:CGRectMake(100, 100, 100, 100)];
     
 }
 
