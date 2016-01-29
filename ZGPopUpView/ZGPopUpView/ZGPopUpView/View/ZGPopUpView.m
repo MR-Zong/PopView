@@ -93,6 +93,7 @@ static CGFloat popUpViewLeftInset = 3;
     self.contentView = contentView;
     contentView.frame = self.bounds;
     [self addSubview:contentView];
+    self.backgroundColor = [UIColor clearColor];
 }
 
 
@@ -154,11 +155,11 @@ static CGFloat popUpViewLeftInset = 3;
     CGContextClosePath(context);
     
 //    CGContextClip(context);
-    
+//    CGContextStrokePath(context);
+    CGContextSetFillColorWithColor(context, [UIColor blackColor].CGColor);
     CGContextDrawPath(context, kCGPathEOFillStroke);
 
     
-    [super drawRect:rect];
 }
 
 
