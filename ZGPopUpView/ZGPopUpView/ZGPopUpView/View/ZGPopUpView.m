@@ -9,12 +9,12 @@
 #import "ZGPopUpView.h"
 
 
-static CGFloat leftInset = 10;
-static CGFloat topInset = 10;
+static CGFloat contentViewLeftInset = 10;
+static CGFloat contentViewTopInset = 10;
 static CGFloat arrowRadius = 15;
 static CGFloat cornerRadius = 10;
 static CGFloat rightExtendDistance = 10;
-static CGFloat popUpViewLeftInset = 3;
+static CGFloat popUpViewInset = 3;
 
 @interface ZGPopUpView ()
 
@@ -35,7 +35,7 @@ static CGFloat popUpViewLeftInset = 3;
     
      CGRect textRect = [message boundingRectWithSize:CGSizeMake(300, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName : self.defaultFont} context:nil];
     
-    CGRect contentViewFrame = CGRectMake(leftInset + popUpViewLeftInset, arrowRadius + topInset, textRect.size.width, textRect.size.height);
+    CGRect contentViewFrame = CGRectMake(contentViewLeftInset + popUpViewInset, arrowRadius + contentViewTopInset, textRect.size.width, textRect.size.height);
     
     UILabel *messageLabel = [[UILabel alloc] init];
     messageLabel.numberOfLines = 0;
@@ -48,10 +48,10 @@ static CGFloat popUpViewLeftInset = 3;
     CGFloat arrowPointY = rect.origin.y + rect.size.height;
     
     CGPoint arrowPoint = CGPointMake(arrowPointX, arrowPointY);
-    CGFloat popUpViewWidth = contentViewFrame.size.width + 2*(leftInset +popUpViewLeftInset);
-    CGFloat popUpViewHeight = contentViewFrame.size.height + arrowRadius + 2 * (topInset) + popUpViewLeftInset;
+    CGFloat popUpViewWidth = contentViewFrame.size.width + 2*(contentViewLeftInset +popUpViewInset);
+    CGFloat popUpViewHeight = contentViewFrame.size.height + arrowRadius + 2 * (contentViewTopInset) + popUpViewInset;
     
-    CGRect popUpViewFrame = CGRectMake(arrowPoint.x - (popUpViewWidth - arrowRadius - rightExtendDistance - cornerRadius  - popUpViewLeftInset) , arrowPoint.y, popUpViewWidth, popUpViewHeight);
+    CGRect popUpViewFrame = CGRectMake(arrowPoint.x - (popUpViewWidth - arrowRadius - rightExtendDistance - cornerRadius  - popUpViewInset) , arrowPoint.y, popUpViewWidth, popUpViewHeight);
     
     ZGPopUpView *popUpView = [[self alloc] initWithFrame:popUpViewFrame];
     popUpView.contentView.frame = contentViewFrame;
@@ -96,7 +96,7 @@ static CGFloat popUpViewLeftInset = 3;
     self.contentView = contentView;
     contentView.frame = self.bounds;
     [self addSubview:contentView];
-    self.backgroundColor = [UIColor blackColor];
+    self.backgroundColor = [UIColor clearColor];
 }
 
 
@@ -107,11 +107,11 @@ static CGFloat popUpViewLeftInset = 3;
     
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextSetRGBStrokeColor(context,1,0,0,1);
-    CGSize  rectSize = CGSizeMake(rect.size.width - 2*popUpViewLeftInset, rect.size.height -arrowRadius - popUpViewLeftInset);
+    CGSize  rectSize = CGSizeMake(rect.size.width - 2*popUpViewInset, rect.size.height -arrowRadius - popUpViewInset);
     
     CGFloat leftExtendDistance = rectSize.width  - rightExtendDistance - 2*(cornerRadius + arrowRadius);
     CGSize arrowSize = CGSizeMake(arrowRadius, arrowRadius);
-    CGPoint startPoint = CGPointMake((rectSize.width + 2*popUpViewLeftInset) - arrowRadius - rightExtendDistance - cornerRadius - popUpViewLeftInset, 0);
+    CGPoint startPoint = CGPointMake((rectSize.width + 2*popUpViewInset) - arrowRadius - rightExtendDistance - cornerRadius - popUpViewInset, 0);
     CGPoint leftEndPoint = CGPointMake(startPoint.x - arrowSize.width, startPoint.y + arrowSize.height);
     
     
