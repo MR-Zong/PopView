@@ -35,7 +35,7 @@ static CGFloat popUpViewLeftInset = 3;
     
      CGRect textRect = [message boundingRectWithSize:CGSizeMake(300, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName : self.defaultFont} context:nil];
     
-    CGRect contentViewFrame = CGRectMake(arrowRadius, arrowRadius + topInset, textRect.size.width, textRect.size.height);
+    CGRect contentViewFrame = CGRectMake(leftInset + popUpViewLeftInset, arrowRadius + topInset, textRect.size.width, textRect.size.height);
     
     UILabel *messageLabel = [[UILabel alloc] init];
     messageLabel.numberOfLines = 0;
@@ -44,17 +44,20 @@ static CGFloat popUpViewLeftInset = 3;
     messageLabel.font = self.defaultFont;
     messageLabel.textColor = [UIColor grayColor];
     
-    CGPoint arrowPoint = CGPointMake(310, 300);
-
-    CGFloat popUpViewWidth = contentViewFrame.size.width + 2*(leftInset) + 2*popUpViewLeftInset;
+    CGFloat arrowPointX = rect.origin.x + rect.size.width * 0.5;
+    CGFloat arrowPointY = rect.origin.y + rect.size.height;
+    
+    CGPoint arrowPoint = CGPointMake(arrowPointX, arrowPointY);
+    CGFloat popUpViewWidth = contentViewFrame.size.width + 2*(leftInset +popUpViewLeftInset);
     CGFloat popUpViewHeight = contentViewFrame.size.height + arrowRadius + 2 * (topInset) + popUpViewLeftInset;
-    CGFloat leftExtendDistance = popUpViewWidth  - rightExtendDistance - 2*(cornerRadius + arrowRadius);
-    CGRect popUpViewFrame = CGRectMake(arrowPoint.x - arrowRadius - cornerRadius - leftExtendDistance, arrowPoint.y, popUpViewWidth, popUpViewHeight);
+    
+    CGRect popUpViewFrame = CGRectMake(arrowPoint.x - (popUpViewWidth - arrowRadius - rightExtendDistance - cornerRadius  - popUpViewLeftInset) , arrowPoint.y, popUpViewWidth, popUpViewHeight);
+    
     ZGPopUpView *popUpView = [[self alloc] initWithFrame:popUpViewFrame];
     popUpView.contentView.frame = contentViewFrame;
     [popUpView.contentView addSubview:messageLabel];
     popUpView.maskView.frame = view.bounds;
-//    popUpView.maskView.hidden = YES;
+    popUpView.maskView.hidden = YES;
     [view addSubview:popUpView.maskView];
     [view addSubview:popUpView];
     
@@ -93,7 +96,7 @@ static CGFloat popUpViewLeftInset = 3;
     self.contentView = contentView;
     contentView.frame = self.bounds;
     [self addSubview:contentView];
-    self.backgroundColor = [UIColor clearColor];
+    self.backgroundColor = [UIColor blackColor];
 }
 
 
@@ -101,20 +104,20 @@ static CGFloat popUpViewLeftInset = 3;
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
 - (void)drawRect:(CGRect)rect {
+    
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextSetRGBStrokeColor(context,1,0,0,1);
+    CGSize  rectSize = CGSizeMake(rect.size.width - 2*popUpViewLeftInset, rect.size.height -arrowRadius - popUpViewLeftInset);
     
-    CGSize  rectSize = CGSizeMake(rect.size.width , rect.size.height -arrowRadius - popUpViewLeftInset);
-    CGFloat leftExtendDistance = rectSize.width  - rightExtendDistance - 2*(cornerRadius + arrowRadius) - 2*popUpViewLeftInset;
+    CGFloat leftExtendDistance = rectSize.width  - rightExtendDistance - 2*(cornerRadius + arrowRadius);
     CGSize arrowSize = CGSizeMake(arrowRadius, arrowRadius);
-    CGPoint startPoint = CGPointMake(rectSize.width - arrowRadius - cornerRadius - rightExtendDistance -popUpViewLeftInset , 0);
+    CGPoint startPoint = CGPointMake((rectSize.width + 2*popUpViewLeftInset) - arrowRadius - rightExtendDistance - cornerRadius - popUpViewLeftInset, 0);
     CGPoint leftEndPoint = CGPointMake(startPoint.x - arrowSize.width, startPoint.y + arrowSize.height);
-    CGPoint leftMidPoint =CGPointMake(startPoint.x, leftEndPoint.y);
     
     
     // 箭头左边弧线
     CGContextMoveToPoint(context,startPoint.x,startPoint.y);//圆弧的起始点
-    CGContextAddArcToPoint(context, leftMidPoint.x, leftMidPoint.y, leftEndPoint.x, leftEndPoint.y, arrowRadius);
+    CGContextAddArcToPoint(context, startPoint.x, leftEndPoint.y, leftEndPoint.x, leftEndPoint.y, arrowRadius);
     
     // 向左延伸直线
     CGContextAddLineToPoint(context, leftEndPoint.x - leftExtendDistance, leftEndPoint.y);
