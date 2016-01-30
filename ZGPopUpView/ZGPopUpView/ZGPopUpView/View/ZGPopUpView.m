@@ -67,7 +67,7 @@ static ZGPopUpView *_popUpView_;
          *  创建时候不指定箭头指向，默认是向上
          * ZGPopUpView *popUpView = [[self alloc] initWithArrowDirection:ZGPopUpViewArrowDirectionDown];
          */
-        ZGPopUpView *popUpView = [[self alloc] initWithArrowDirection:ZGPopUpViewArrowDirectionDown];
+        ZGPopUpView *popUpView = [[self alloc] init];
         [popUpView showMessage:message attributes:attributes inView:view rect:rect];
     }
     
@@ -119,7 +119,7 @@ static ZGPopUpView *_popUpView_;
     
     _popUpView_ = self;
     
-    if ([self.delegate respondsToSelector:@selector(popUpViewWillShow:)]) {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(popUpViewWillShow:)]) {
         [self.delegate popUpViewWillShow:self];
     }
     CGRect popUpViewFrame = [self popUpViewFrameWithView:view rect:rect];
@@ -130,7 +130,7 @@ static ZGPopUpView *_popUpView_;
             [UIView animateWithDuration:0.25 animations:^{
                 self.frame = popUpViewFrame;
             }completion:^(BOOL finished) {
-                if ([self.delegate respondsToSelector:@selector(popUpViewDidShow:)]) {
+                if (self.delegate && [self.delegate respondsToSelector:@selector(popUpViewDidShow:)]) {
                     [self.delegate popUpViewDidShow:self];
                 }
             }];
@@ -142,7 +142,7 @@ static ZGPopUpView *_popUpView_;
             [UIView animateWithDuration:0.25 animations:^{
                 self.alpha = 1.0;
             }completion:^(BOOL finished) {
-                if ([self.delegate respondsToSelector:@selector(popUpViewDidShow:)]) {
+                if (self.delegate && [self.delegate respondsToSelector:@selector(popUpViewDidShow:)]) {
                     [self.delegate popUpViewDidShow:self];
                 }
             }];
@@ -365,7 +365,7 @@ static ZGPopUpView *_popUpView_;
 {
     if (self.window) {
         
-        if ([self.delegate respondsToSelector:@selector(popUpViewWillDismiss:)]) {
+        if (self.delegate && [self.delegate respondsToSelector:@selector(popUpViewWillDismiss:)]) {
             [self.delegate popUpViewWillDismiss:self];
         }
         switch (self.showAnimationType) {
@@ -378,7 +378,7 @@ static ZGPopUpView *_popUpView_;
                  {
                      [self.maskView removeFromSuperview];
                      [self removeFromSuperview];
-                     if ([self.delegate respondsToSelector:@selector(popUpViewDidDismissed:)]) {
+                     if (self.delegate && [self.delegate respondsToSelector:@selector(popUpViewDidDismissed:)]) {
                          [self.delegate popUpViewDidDismissed:self];
                      }
                  }];
@@ -391,7 +391,7 @@ static ZGPopUpView *_popUpView_;
                 } completion:^(BOOL finished) {
                     [self.maskView removeFromSuperview];
                     [self removeFromSuperview];
-                    if ([self.delegate respondsToSelector:@selector(popUpViewDidDismissed:)]) {
+                    if (self.delegate && [self.delegate respondsToSelector:@selector(popUpViewDidDismissed:)]) {
                         [self.delegate popUpViewDidDismissed:self];
                     }
                 }];
