@@ -53,27 +53,13 @@ static ZGPopUpView *_popUpView_;
 
 @implementation ZGPopUpView
 
-+ (void)showMessage:(NSString *)message inView:(UIView *)view rect:(CGRect)rect
++ (void)showMessage:(NSString *)message attributes:(NSDictionary *)attributes inView:(UIView *)view rect:(CGRect)rect
 {
 
     if (message.length > 0) {
         
         if (_popUpView_.window) return;
-        
-        // 算出传入文字rect
-        CGRect textRect = [message boundingRectWithSize:CGSizeMake(300, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName : self.defaultFont} context:nil];
-        
-        CGSize contentViewSize = textRect.size;
-        
-        // 设置label 属性
-        UILabel *messageLabel = [[UILabel alloc] init];
-        messageLabel.numberOfLines = 0;
-        messageLabel.text = message;
-        messageLabel.frame = textRect;
-        messageLabel.font = self.defaultFont;
-        messageLabel.textColor = [UIColor grayColor];
-        
-        
+
         /** 以下，是使用ZGPopUpView最基本步骤
          *  当然你还可以在此基础上再设置popUpView的各种属性，达到你要的效果
         */
@@ -82,17 +68,49 @@ static ZGPopUpView *_popUpView_;
          * ZGPopUpView *popUpView = [[self alloc] initWithArrowDirection:ZGPopUpViewArrowDirectionDown];
          */
         ZGPopUpView *popUpView = [[self alloc] init];
-        
-        // 把内容控件添加到容器视图，在这里要显示的内容是文字Label，但也可以是其他任何控件
-        [popUpView.contentView addSubview:messageLabel];
-        
-        // 设置contentView的size
-        popUpView.contentView.size = contentViewSize;
-
-        // 调用showInView:rect:
-        [popUpView showInView:view rect:rect];
+        [popUpView showMessage:message attributes:attributes inView:view rect:rect];
     }
     
+}
+
+- (void)showMessage:(NSString *)message attributes:(NSDictionary *)attributes inView:(UIView *)view rect:(CGRect)rect
+{
+    if (message.length > 0) {
+        
+        if (_popUpView_.window) return;
+        
+        UIColor *textColor = nil;
+        UIFont *textFont = nil;
+        if (attributes) {
+            textColor = (UIColor *)attributes[NSForegroundColorAttributeName];
+            textFont = (UIFont *)attributes[NSFontAttributeName];
+        }
+        textFont = textFont ? textFont : self.defaultFont;
+        // 算出传入文字rect
+        CGRect textRect = [message boundingRectWithSize:CGSizeMake(300, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName : textFont} context:nil];
+        
+        CGSize contentViewSize = textRect.size;
+        
+        // 设置label 属性
+        UILabel *messageLabel = [[UILabel alloc] init];
+        messageLabel.numberOfLines = 0;
+        messageLabel.text = message;
+        messageLabel.frame = textRect;
+        if (textColor) {
+            messageLabel.textColor = textColor;
+        }
+        messageLabel.font = textFont;
+        messageLabel.textColor = [UIColor grayColor];
+        
+        // 把内容控件添加到容器视图，在这里要显示的内容是文字Label，但也可以是其他任何控件
+        [self.contentView addSubview:messageLabel];
+        
+        // 设置contentView的size
+        self.contentView.size = contentViewSize;
+        
+        // 调用showInView:rect:
+        [self showInView:view rect:rect];
+    }
 }
 
 - (void)showInView:(UIView *)view rect:(CGRect)rect
@@ -101,6 +119,9 @@ static ZGPopUpView *_popUpView_;
     
     _popUpView_ = self;
     
+    if ([self.delegate respondsToSelector:@selector(popUpViewWillShow:)]) {
+        [self.delegate popUpViewWillShow:self];
+    }
     CGRect popUpViewFrame = [self popUpViewFrameWithView:view rect:rect];
     
     switch (self.showAnimationType) {
@@ -108,6 +129,10 @@ static ZGPopUpView *_popUpView_;
             self.frame = CGRectMake(self.arrowPoint.x, self.arrowPoint.y, 0.01, 0.01);
             [UIView animateWithDuration:0.25 animations:^{
                 self.frame = popUpViewFrame;
+            }completion:^(BOOL finished) {
+                if ([self.delegate respondsToSelector:@selector(popUpViewDidShow:)]) {
+                    [self.delegate popUpViewDidShow:self];
+                }
             }];
             break;
         }
@@ -116,6 +141,10 @@ static ZGPopUpView *_popUpView_;
             self.alpha = 0;
             [UIView animateWithDuration:0.25 animations:^{
                 self.alpha = 1.0;
+            }completion:^(BOOL finished) {
+                if ([self.delegate respondsToSelector:@selector(popUpViewDidShow:)]) {
+                    [self.delegate popUpViewDidShow:self];
+                }
             }];
             break;
         }
@@ -154,6 +183,11 @@ static ZGPopUpView *_popUpView_;
 }
 
 + (UIFont *)defaultFont
+{
+    return [UIFont systemFontOfSize:15];
+}
+
+- (UIFont *)defaultFont
 {
     return [UIFont systemFontOfSize:15];
 }
@@ -202,7 +236,7 @@ static ZGPopUpView *_popUpView_;
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
 - (void)drawRect:(CGRect)rect {
-    
+
     CGContextRef context = UIGraphicsGetCurrentContext();
 //    CGContextSetRGBStrokeColor(context,1,0,0,1);
     UIColor *strokeColor = [UIColor redColor];
@@ -317,7 +351,6 @@ static ZGPopUpView *_popUpView_;
     }
     CGContextSetFillColorWithColor(context, bgColor.CGColor);
     CGContextDrawPath(context, kCGPathEOFillStroke);
-
     
 }
 
@@ -332,6 +365,9 @@ static ZGPopUpView *_popUpView_;
 {
     if (self.window) {
         
+        if ([self.delegate respondsToSelector:@selector(popUpViewWillDismiss:)]) {
+            [self.delegate popUpViewWillDismiss:self];
+        }
         switch (self.showAnimationType) {
             case ZGPopUpViewShowAnimationTypeDefault:{
                 
@@ -342,6 +378,9 @@ static ZGPopUpView *_popUpView_;
                  {
                      [self.maskView removeFromSuperview];
                      [self removeFromSuperview];
+                     if ([self.delegate respondsToSelector:@selector(popUpViewDidDismissed:)]) {
+                         [self.delegate popUpViewDidDismissed:self];
+                     }
                  }];
                 break;
             }
@@ -352,6 +391,9 @@ static ZGPopUpView *_popUpView_;
                 } completion:^(BOOL finished) {
                     [self.maskView removeFromSuperview];
                     [self removeFromSuperview];
+                    if ([self.delegate respondsToSelector:@selector(popUpViewDidDismissed:)]) {
+                        [self.delegate popUpViewDidDismissed:self];
+                    }
                 }];
                 break;
             }

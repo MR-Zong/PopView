@@ -36,12 +36,13 @@
 {
     NSString *message = @"宗根徐宗根徐宗根徐宗根徐宗根徐宗根徐宗根徐宗根徐宗根徐宗根徐宗根徐";
     //    [ZGPopUpView showMessage:message inView:self.view rect:CGRectMake(300, 100, 50, 100)];
-    [ZGPopUpView showMessage:message inView:self.view rect:self.btn.frame];
+    [ZGPopUpView showMessage:message attributes:@{NSForegroundColorAttributeName : [UIColor yellowColor]} inView:self.view rect:self.btn.frame];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+
     
 }
 
