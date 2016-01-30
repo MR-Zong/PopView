@@ -16,6 +16,8 @@ static CGFloat cornerRadius = 10;
 static CGFloat rightExtendDistance = 10;
 static CGFloat popUpViewInset = 3;
 
+static ZGPopUpView *_popUpView_;
+
 @interface ZGPopUpView ()
 
 @property (nonatomic, strong) UIView *maskView;
@@ -26,41 +28,78 @@ static CGFloat popUpViewInset = 3;
 
 @property (nonatomic, strong) UIFont *font;
 
+@property (nonatomic,assign) CGPoint arrowPoint;
+
 @end
 
 @implementation ZGPopUpView
 
 + (void)showMessage:(NSString *)message inView:(UIView *)view rect:(CGRect)rect
 {
+
+    if (message.length > 0) {
+        
+        if (_popUpView_.window) return;
+        
+        CGRect textRect = [message boundingRectWithSize:CGSizeMake(300, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName : self.defaultFont} context:nil];
+        
+        CGRect contentViewFrame = CGRectMake(contentViewLeftInset + popUpViewInset, arrowRadius + contentViewTopInset, textRect.size.width, textRect.size.height);
+        
+        UILabel *messageLabel = [[UILabel alloc] init];
+        messageLabel.numberOfLines = 0;
+        messageLabel.text = message;
+        messageLabel.frame = textRect;
+        messageLabel.font = self.defaultFont;
+        messageLabel.textColor = [UIColor grayColor];
+        
+        ZGPopUpView *popUpView = [[self alloc] init];
+        [popUpView.contentView addSubview:messageLabel];
+        popUpView.contentView.frame = contentViewFrame;
+        [popUpView showInView:view rect:rect];
+    }
     
-     CGRect textRect = [message boundingRectWithSize:CGSizeMake(300, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName : self.defaultFont} context:nil];
+}
+
+- (void)showInView:(UIView *)view rect:(CGRect)rect
+{
+    if (self.window) return;
     
-    CGRect contentViewFrame = CGRectMake(contentViewLeftInset + popUpViewInset, arrowRadius + contentViewTopInset, textRect.size.width, textRect.size.height);
-    
-    UILabel *messageLabel = [[UILabel alloc] init];
-    messageLabel.numberOfLines = 0;
-    messageLabel.text = message;
-    messageLabel.frame = textRect;
-    messageLabel.font = self.defaultFont;
-    messageLabel.textColor = [UIColor grayColor];
+    _popUpView_ = self;
     
     CGFloat arrowPointX = rect.origin.x + rect.size.width * 0.5;
     CGFloat arrowPointY = rect.origin.y + rect.size.height;
     
     CGPoint arrowPoint = CGPointMake(arrowPointX, arrowPointY);
-    CGFloat popUpViewWidth = contentViewFrame.size.width + 2*(contentViewLeftInset +popUpViewInset);
-    CGFloat popUpViewHeight = contentViewFrame.size.height + arrowRadius + 2 * (contentViewTopInset) + popUpViewInset;
+    CGFloat popUpViewWidth = self.contentView.frame.size.width + 2*(contentViewLeftInset +popUpViewInset);
+    CGFloat popUpViewHeight = self.contentView.frame.size.height + arrowRadius + 2 * (contentViewTopInset) + popUpViewInset;
     
     CGRect popUpViewFrame = CGRectMake(arrowPoint.x - (popUpViewWidth - arrowRadius - rightExtendDistance - cornerRadius  - popUpViewInset) , arrowPoint.y, popUpViewWidth, popUpViewHeight);
     
-    ZGPopUpView *popUpView = [[self alloc] initWithFrame:popUpViewFrame];
-    popUpView.contentView.frame = contentViewFrame;
-    [popUpView.contentView addSubview:messageLabel];
-    popUpView.maskView.frame = view.bounds;
-    popUpView.maskView.hidden = YES;
-    [view addSubview:popUpView.maskView];
-    [view addSubview:popUpView];
+    self.arrowPoint = arrowPoint;
+    self.maskView.frame = view.bounds;
+    [view addSubview:self.maskView];
+    [view addSubview:self];
     
+    
+    switch (self.showAnimationType) {
+        case ZGPopUpViewShowAnimationTypeDefault:{
+            self.frame = CGRectMake(self.arrowPoint.x, self.arrowPoint.y, 0.01, 0.01);
+            [UIView animateWithDuration:0.25 animations:^{
+                self.frame = popUpViewFrame;
+            }];
+            break;
+        }
+        case ZGPopUpViewShowAnimationTypeAlpha:{
+            self.frame = popUpViewFrame;
+            self.alpha = 0;
+            [UIView animateWithDuration:0.25 animations:^{
+                self.alpha = 1.0;
+            }];
+            break;
+        }
+        default:
+            break;
+    }
 }
 
 + (UIFont *)defaultFont
@@ -159,12 +198,67 @@ static CGFloat popUpViewInset = 3;
     
 //    CGContextClip(context);
 //    CGContextStrokePath(context);
-    CGContextSetFillColorWithColor(context, [UIColor blackColor].CGColor);
+    UIColor *bgColor = [UIColor blackColor];
+    if (self.popUpViewBackgroundColor) {
+        bgColor = self.popUpViewBackgroundColor;
+    }
+    CGContextSetFillColorWithColor(context, bgColor.CGColor);
     CGContextDrawPath(context, kCGPathEOFillStroke);
 
     
 }
 
+
+#pragma mark - dismiss
++ (void)dismiss
+{
+    [_popUpView_ dismiss];
+}
+
+- (void)dismiss
+{
+    if (self.window) {
+        
+        switch (self.showAnimationType) {
+            case ZGPopUpViewShowAnimationTypeDefault:{
+                
+                [UIView animateWithDuration:0.25 animations:^(void)
+                 {
+                     self.frame = CGRectMake(self.arrowPoint.x, self.arrowPoint.y, 0.01, 0.01);
+                 }completion:^(BOOL finish)
+                 {
+                     [self.maskView removeFromSuperview];
+                     [self removeFromSuperview];
+                 }];
+                break;
+            }
+            case ZGPopUpViewShowAnimationTypeAlpha:{
+                
+                [UIView animateWithDuration:0.25 animations:^{
+                    self.alpha = 0;
+                } completion:^(BOOL finished) {
+                    [self.maskView removeFromSuperview];
+                    [self removeFromSuperview];
+                }];
+                break;
+            }
+                
+            default:
+                break;
+        }
+        
+        
+    }
+    
+    
+}
+
+
+#pragma mark - tapMaskView
+- (void)tapMaskView:(UITapGestureRecognizer *)tagGesture
+{
+    [self dismiss];
+}
 
 #pragma mark - lazyLoad
 - (UIView *)maskView
@@ -172,6 +266,31 @@ static CGFloat popUpViewInset = 3;
     if (!_maskView) {
         _maskView = [[UIView alloc] init];
         _maskView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.5];
+        UIColor *maskViewBGColor = [UIColor blackColor];
+        if (self.maskViewBackgroundColor) {
+            maskViewBGColor = self.maskViewBackgroundColor;
+        }
+        switch (self.popUpViewMaskStyle) {
+            case ZGPopUpViewMaskStyleTranslucent:
+                _maskView.backgroundColor = [maskViewBGColor colorWithAlphaComponent:0.5];
+                break;
+                
+            case ZGPopUpViewMaskStyleOpaque:
+                _maskView.backgroundColor = maskViewBGColor;
+                break;
+                
+            case ZGPopUpViewMaskStyleNone:
+                _maskView.hidden = YES;
+                break;
+                
+            default:
+                break;
+        }
+        
+        
+        UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapMaskView:)];
+        [_maskView addGestureRecognizer:tapGesture];
+        
     }
     return _maskView;
 }
