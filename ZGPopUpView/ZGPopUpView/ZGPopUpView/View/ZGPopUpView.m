@@ -9,6 +9,7 @@
 #import "ZGPopUpView.h"
 
 
+
 static CGFloat contentViewLeftInset = 10;
 static CGFloat contentViewTopInset = 10;
 static CGFloat arrowRadius = 15;
@@ -17,6 +18,24 @@ static CGFloat rightExtendDistance = 10;
 static CGFloat popUpViewInset = 3;
 
 static ZGPopUpView *_popUpView_;
+
+@implementation ZGContentView
+
+- (void)setSize:(CGSize)size
+{
+    _size = size;
+    
+    // 设置contentView frame
+    ZGPopUpView *popUpView = (ZGPopUpView *)self.superview;
+    ZGPopUpViewArrowDirection arrowDirection =  [[popUpView valueForKeyPath:@"arrowDirection"] integerValue];
+    if (arrowDirection == ZGPopUpViewArrowDirectionUp) {
+        self.frame = CGRectMake(contentViewLeftInset + popUpViewInset, arrowRadius + contentViewTopInset, size.width, size.height);
+    }else if(arrowDirection == ZGPopUpViewArrowDirectionDown ){
+        self.frame = CGRectMake(contentViewLeftInset + popUpViewInset, popUpViewInset + contentViewTopInset, size.width, size.height);
+    }
+}
+
+@end
 
 @interface ZGPopUpView ()
 
@@ -27,6 +46,8 @@ static ZGPopUpView *_popUpView_;
 @property (nonatomic, strong) UIFont *font;
 
 @property (nonatomic,assign) CGPoint arrowPoint;
+
+@property (nonatomic, assign) ZGPopUpViewArrowDirection arrowDirection;
 
 @end
 
@@ -42,8 +63,7 @@ static ZGPopUpView *_popUpView_;
         // 算出传入文字rect
         CGRect textRect = [message boundingRectWithSize:CGSizeMake(300, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName : self.defaultFont} context:nil];
         
-        // 算出contentView frame
-        CGRect contentViewFrame = CGRectMake(contentViewLeftInset + popUpViewInset, arrowRadius + contentViewTopInset, textRect.size.width, textRect.size.height);
+        CGSize contentViewSize = textRect.size;
         
         // 设置label 属性
         UILabel *messageLabel = [[UILabel alloc] init];
@@ -57,15 +77,18 @@ static ZGPopUpView *_popUpView_;
         /** 以下，是使用ZGPopUpView最基本步骤
          *  当然你还可以在此基础上再设置popUpView的各种属性，达到你要的效果
         */
-        // 创建popUpView
+        /** 特别注意，创建时,可以指定箭头指向的方向：向上或向下
+         *  创建时候不指定箭头指向，默认是向上
+         * ZGPopUpView *popUpView = [[self alloc] initWithArrowDirection:ZGPopUpViewArrowDirectionDown];
+         */
         ZGPopUpView *popUpView = [[self alloc] init];
         
         // 把内容控件添加到容器视图，在这里要显示的内容是文字Label，但也可以是其他任何控件
         [popUpView.contentView addSubview:messageLabel];
         
-        // 设置容器视图的frame
-        popUpView.contentView.frame = contentViewFrame;
-        
+        // 设置contentView的size
+        popUpView.contentView.size = contentViewSize;
+
         // 调用showInView:rect:
         [popUpView showInView:view rect:rect];
     }
@@ -78,20 +101,7 @@ static ZGPopUpView *_popUpView_;
     
     _popUpView_ = self;
     
-    CGFloat arrowPointX = rect.origin.x + rect.size.width * 0.5;
-    CGFloat arrowPointY = rect.origin.y + rect.size.height;
-    
-    CGPoint arrowPoint = CGPointMake(arrowPointX, arrowPointY);
-    CGFloat popUpViewWidth = self.contentView.frame.size.width + 2*(contentViewLeftInset +popUpViewInset);
-    CGFloat popUpViewHeight = self.contentView.frame.size.height + arrowRadius + 2 * (contentViewTopInset) + popUpViewInset;
-    
-    CGRect popUpViewFrame = CGRectMake(arrowPoint.x - (popUpViewWidth - arrowRadius - rightExtendDistance - cornerRadius  - popUpViewInset) , arrowPoint.y, popUpViewWidth, popUpViewHeight);
-    
-    self.arrowPoint = arrowPoint;
-    self.maskView.frame = view.bounds;
-    [view addSubview:self.maskView];
-    [view addSubview:self];
-    
+    CGRect popUpViewFrame = [self popUpViewFrameWithView:view rect:rect];
     
     switch (self.showAnimationType) {
         case ZGPopUpViewShowAnimationTypeDefault:{
@@ -112,6 +122,35 @@ static ZGPopUpView *_popUpView_;
         default:
             break;
     }
+}
+
+
+- (CGRect)popUpViewFrameWithView:(UIView *)view rect:(CGRect)rect
+{
+    CGFloat popUpViewWidth = self.contentView.frame.size.width + 2*(contentViewLeftInset +popUpViewInset);
+    CGFloat popUpViewHeight = self.contentView.frame.size.height + arrowRadius + 2 * (contentViewTopInset) + popUpViewInset;
+    
+    CGFloat arrowPointX = rect.origin.x + rect.size.width * 0.5;
+    CGFloat arrowPointY = 0.0;
+    CGFloat popUpViewY = 0.0;
+    if (self.arrowDirection == ZGPopUpViewArrowDirectionUp) {
+        arrowPointY = rect.origin.y + rect.size.height;
+        popUpViewY = arrowPointY;
+    }else if(self.arrowDirection == ZGPopUpViewArrowDirectionDown){
+        arrowPointY = rect.origin.y;
+        popUpViewY = arrowPointY - popUpViewHeight;
+    }
+    
+    CGPoint arrowPoint = CGPointMake(arrowPointX, arrowPointY);
+
+    CGRect popUpViewFrame = CGRectMake(arrowPoint.x - (popUpViewWidth - arrowRadius - rightExtendDistance - cornerRadius  - popUpViewInset) , popUpViewY, popUpViewWidth, popUpViewHeight);
+    
+    self.arrowPoint = arrowPoint;
+    self.maskView.frame = view.bounds;
+    [view addSubview:self.maskView];
+    [view addSubview:self];
+    
+    return popUpViewFrame;
 }
 
 + (UIFont *)defaultFont
@@ -141,12 +180,20 @@ static ZGPopUpView *_popUpView_;
     [self initialize];
 }
 
+- (instancetype)initWithArrowDirection:(ZGPopUpViewArrowDirection)arrowDirection
+{
+    if (self = [super init]) {
+        self.arrowDirection = arrowDirection;
+    }
+    return self;
+}
+
 - (void)initialize
 {
-    UIView *contentView = [[UIView alloc] init];
+    ZGContentView *contentView = [[ZGContentView alloc] init];
+    [self addSubview:contentView];
     self.contentView = contentView;
     contentView.frame = self.bounds;
-    [self addSubview:contentView];
     self.backgroundColor = [UIColor clearColor];
 }
 
@@ -167,49 +214,98 @@ static ZGPopUpView *_popUpView_;
     
     CGFloat leftExtendDistance = rectSize.width  - rightExtendDistance - 2*(cornerRadius + arrowRadius);
     CGSize arrowSize = CGSizeMake(arrowRadius, arrowRadius);
-    CGPoint startPoint = CGPointMake((rectSize.width + 2*popUpViewInset) - arrowRadius - rightExtendDistance - cornerRadius - popUpViewInset, 0);
-    CGPoint leftEndPoint = CGPointMake(startPoint.x - arrowSize.width, startPoint.y + arrowSize.height);
     
+    if (self.arrowDirection == ZGPopUpViewArrowDirectionUp) {
+        
+        CGPoint startPoint = CGPointMake((rectSize.width + 2*popUpViewInset) - arrowRadius - rightExtendDistance - cornerRadius - popUpViewInset, 0);
+        CGPoint leftEndPoint = CGPointMake(startPoint.x - arrowSize.width, startPoint.y + arrowSize.height);
+        
+        
+        // 箭头左边弧线
+        CGContextMoveToPoint(context,startPoint.x,startPoint.y);//圆弧的起始点
+        CGContextAddArcToPoint(context, startPoint.x, leftEndPoint.y, leftEndPoint.x, leftEndPoint.y, arrowRadius);
+        
+        // 向左延伸直线
+        CGContextAddLineToPoint(context, leftEndPoint.x - leftExtendDistance, leftEndPoint.y);
+        
+        CGPoint leftCornerPoint = CGPointMake(leftEndPoint.x - leftExtendDistance - cornerRadius, leftEndPoint.y);
+        // 矩形左上角圆弧corner
+        CGContextAddArcToPoint(context, leftCornerPoint.x, leftCornerPoint.y, leftCornerPoint.x, leftCornerPoint.y + cornerRadius, cornerRadius);
+        
+        // 矩形左边向下延伸
+        CGContextAddLineToPoint(context, leftCornerPoint.x, leftCornerPoint.y + cornerRadius + (rectSize.height - 2*cornerRadius));
+        
+        // 矩形左下角corner
+        CGContextAddArcToPoint(context, leftCornerPoint.x, leftCornerPoint.y + rectSize.height, leftCornerPoint.x + cornerRadius, leftCornerPoint.y + rectSize.height, cornerRadius);
+        
+        
+        
+        CGPoint rightCornerPoint = CGPointMake(startPoint.x + arrowRadius + rightExtendDistance + cornerRadius, leftCornerPoint.y);
+        
+        // 延伸矩形底边
+        CGContextAddLineToPoint(context, rightCornerPoint.x - cornerRadius, rightCornerPoint.y + rectSize.height);
+        
+        // 矩形右下角
+        CGContextAddArcToPoint(context, rightCornerPoint.x, rightCornerPoint.y + rectSize.height, rightCornerPoint.x, rightCornerPoint.y + rectSize.height - cornerRadius, cornerRadius);
+        
+        // 延伸矩形右边线
+        CGContextAddLineToPoint(context, rightCornerPoint.x, rightCornerPoint.y + cornerRadius);
+        
+        // 矩形右上角
+        CGContextAddArcToPoint(context, rightCornerPoint.x, rightCornerPoint.y, rightCornerPoint.x - cornerRadius, rightCornerPoint.y, cornerRadius);
+        
+        // 延伸arrow右边延伸
+        CGContextAddLineToPoint(context, rightCornerPoint.x - cornerRadius - rightExtendDistance, rightCornerPoint.y);
+        
+        // arrow右边弧形
+        CGContextAddArcToPoint(context, startPoint.x , rightCornerPoint.y, startPoint.x, startPoint.y, arrowRadius);
+        
+    }else if (self.arrowDirection == ZGPopUpViewArrowDirectionDown){
+        
+        CGPoint startPoint = CGPointMake((rectSize.width + 2*popUpViewInset) - arrowRadius - rightExtendDistance - cornerRadius - popUpViewInset, rectSize.height + arrowRadius + popUpViewInset);
+        CGPoint leftEndPoint = CGPointMake(startPoint.x - arrowSize.width, startPoint.y - arrowSize.height);
+        
+        // 箭头左边弧线
+        CGContextMoveToPoint(context,startPoint.x,startPoint.y);//圆弧的起始点
+        CGContextAddArcToPoint(context, startPoint.x, leftEndPoint.y, leftEndPoint.x, leftEndPoint.y, arrowRadius);
+        
+        // 向左延伸直线
+        CGContextAddLineToPoint(context, leftEndPoint.x - leftExtendDistance, leftEndPoint.y);
+        
+        CGPoint leftCornerPoint = CGPointMake(leftEndPoint.x - leftExtendDistance - cornerRadius, leftEndPoint.y);
+        // 矩形左下角圆弧corner
+        CGContextAddArcToPoint(context, leftCornerPoint.x, leftCornerPoint.y, leftCornerPoint.x, leftCornerPoint.y - cornerRadius, cornerRadius);
+        
+        // 矩形左边向上延伸
+        CGContextAddLineToPoint(context, leftCornerPoint.x, leftCornerPoint.y - cornerRadius - (rectSize.height - 2*cornerRadius));
+        
+        // 矩形左上角corner
+        CGContextAddArcToPoint(context, leftCornerPoint.x, leftCornerPoint.y - rectSize.height, leftCornerPoint.x + cornerRadius, leftCornerPoint.y - rectSize.height, cornerRadius);
+        
+        
+        
+        CGPoint rightCornerPoint = CGPointMake(startPoint.x + arrowRadius + rightExtendDistance + cornerRadius, leftCornerPoint.y);
+        
+        // 延伸矩形底部边线
+        CGContextAddLineToPoint(context, rightCornerPoint.x - cornerRadius, rightCornerPoint.y - rectSize.height);
+        
+        // 矩形右上角
+        CGContextAddArcToPoint(context, rightCornerPoint.x, rightCornerPoint.y - rectSize.height, rightCornerPoint.x, rightCornerPoint.y - rectSize.height + cornerRadius, cornerRadius);
+        
+        // 延伸矩形右边线
+        CGContextAddLineToPoint(context, rightCornerPoint.x, rightCornerPoint.y - cornerRadius);
+        
+        // 矩形右下角
+        CGContextAddArcToPoint(context, rightCornerPoint.x, rightCornerPoint.y, rightCornerPoint.x - cornerRadius, rightCornerPoint.y, cornerRadius);
+        
+        // 延伸arrow右边延伸
+        CGContextAddLineToPoint(context, rightCornerPoint.x - cornerRadius - rightExtendDistance, rightCornerPoint.y);
+        
+        // arrow右边弧形
+        CGContextAddArcToPoint(context, startPoint.x , rightCornerPoint.y, startPoint.x, startPoint.y, arrowRadius);
+        
+    }
     
-    // 箭头左边弧线
-    CGContextMoveToPoint(context,startPoint.x,startPoint.y);//圆弧的起始点
-    CGContextAddArcToPoint(context, startPoint.x, leftEndPoint.y, leftEndPoint.x, leftEndPoint.y, arrowRadius);
-    
-    // 向左延伸直线
-    CGContextAddLineToPoint(context, leftEndPoint.x - leftExtendDistance, leftEndPoint.y);
-    
-    CGPoint leftCornerPoint = CGPointMake(leftEndPoint.x - leftExtendDistance - cornerRadius, leftEndPoint.y);
-    // 矩形左上角圆弧corner
-    CGContextAddArcToPoint(context, leftCornerPoint.x, leftCornerPoint.y, leftCornerPoint.x, leftCornerPoint.y + cornerRadius, cornerRadius);
-    
-    // 矩形左边向下延伸
-    CGContextAddLineToPoint(context, leftCornerPoint.x, leftCornerPoint.y + cornerRadius + (rectSize.height - 2*cornerRadius));
-    
-    // 矩形左下角corner
-    CGContextAddArcToPoint(context, leftCornerPoint.x, leftCornerPoint.y + rectSize.height, leftCornerPoint.x + cornerRadius, leftCornerPoint.y + rectSize.height, cornerRadius);
-    
-    
-    
-    CGPoint rightCornerPoint = CGPointMake(startPoint.x + arrowRadius + rightExtendDistance + cornerRadius, leftCornerPoint.y);
-    
-    // 延伸矩形底边
-    CGContextAddLineToPoint(context, rightCornerPoint.x - cornerRadius, rightCornerPoint.y + rectSize.height);
-    
-    // 矩形右下角
-    CGContextAddArcToPoint(context, rightCornerPoint.x, rightCornerPoint.y + rectSize.height, rightCornerPoint.x, rightCornerPoint.y + rectSize.height - cornerRadius, cornerRadius);
-    
-    // 延伸矩形右边线
-    CGContextAddLineToPoint(context, rightCornerPoint.x, rightCornerPoint.y + cornerRadius);
-    
-    // 矩形右上角
-    CGContextAddArcToPoint(context, rightCornerPoint.x, rightCornerPoint.y, rightCornerPoint.x - cornerRadius, rightCornerPoint.y, cornerRadius);
-    
-    // 延伸arrow右边延伸
-    CGContextAddLineToPoint(context, rightCornerPoint.x - cornerRadius - rightExtendDistance, rightCornerPoint.y);
-    
-    // arrow右边弧形
-    CGContextAddArcToPoint(context, startPoint.x , rightCornerPoint.y, startPoint.x, startPoint.y, arrowRadius);
-
     // 封闭矩形
     CGContextClosePath(context);
     

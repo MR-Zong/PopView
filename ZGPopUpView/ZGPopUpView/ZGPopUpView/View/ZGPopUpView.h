@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+
+@interface ZGContentView : UIView
+
+@property (nonatomic, assign) CGSize size;
+@end
+
 typedef enum : NSUInteger {
     ZGPopUpViewMaskStyleTranslucent = 0,
     ZGPopUpViewMaskStyleOpaque,
@@ -20,6 +26,11 @@ typedef enum : NSUInteger {
     ZGPopUpViewShowAnimationTypeAlpha,
 } ZGPopUpViewShowAnimationType;
 
+typedef enum : NSUInteger {
+    ZGPopUpViewArrowDirectionUp = 0,
+    ZGPopUpViewArrowDirectionDown,
+    ZGPopUpViewArrowDirectionDefault = ZGPopUpViewArrowDirectionUp,
+} ZGPopUpViewArrowDirection;
 
 @class ZGPopUpView;
 
@@ -39,13 +50,15 @@ typedef enum : NSUInteger {
 @interface ZGPopUpView : UIView
 
 /** 容器视图 */
-@property (nonatomic, weak) UIView *contentView;
+@property (nonatomic, weak) ZGContentView *contentView;
 @property (nonatomic, strong) UIColor *borderColor;
 @property (nonatomic, strong) UIColor *popUpViewBackgroundColor;
 @property (nonatomic, assign) ZGPopUpViewMaskStyle popUpViewMaskStyle;
 @property (nonatomic, assign) UIColor *maskViewBackgroundColor;
 
-@property (nonatomic,assign) ZGPopUpViewShowAnimationType showAnimationType;
+@property (nonatomic, assign) ZGPopUpViewShowAnimationType showAnimationType;
+
+- (instancetype)initWithArrowDirection:(ZGPopUpViewArrowDirection)arrowDirection;
 
 /** 显示气泡: 便利于显示文字，自动适配文字长度 
  *  @param view 父视图
