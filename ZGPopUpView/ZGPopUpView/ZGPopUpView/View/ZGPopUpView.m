@@ -24,8 +24,6 @@ static ZGPopUpView *_popUpView_;
 
 @property (nonatomic, weak) UIView *popUpView;
 
-@property (nonatomic, weak) UIView *contentView;
-
 @property (nonatomic, strong) UIFont *font;
 
 @property (nonatomic,assign) CGPoint arrowPoint;
@@ -41,10 +39,13 @@ static ZGPopUpView *_popUpView_;
         
         if (_popUpView_.window) return;
         
+        // 算出传入文字rect
         CGRect textRect = [message boundingRectWithSize:CGSizeMake(300, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName : self.defaultFont} context:nil];
         
+        // 算出contentView frame
         CGRect contentViewFrame = CGRectMake(contentViewLeftInset + popUpViewInset, arrowRadius + contentViewTopInset, textRect.size.width, textRect.size.height);
         
+        // 设置label 属性
         UILabel *messageLabel = [[UILabel alloc] init];
         messageLabel.numberOfLines = 0;
         messageLabel.text = message;
@@ -52,9 +53,20 @@ static ZGPopUpView *_popUpView_;
         messageLabel.font = self.defaultFont;
         messageLabel.textColor = [UIColor grayColor];
         
+        
+        /** 以下，是使用ZGPopUpView最基本步骤
+         *  当然你还可以在此基础上再设置popUpView的各种属性，达到你要的效果
+        */
+        // 创建popUpView
         ZGPopUpView *popUpView = [[self alloc] init];
+        
+        // 把内容控件添加到容器视图，在这里要显示的内容是文字Label，但也可以是其他任何控件
         [popUpView.contentView addSubview:messageLabel];
+        
+        // 设置容器视图的frame
         popUpView.contentView.frame = contentViewFrame;
+        
+        // 调用showInView:rect:
         [popUpView showInView:view rect:rect];
     }
     
@@ -145,7 +157,12 @@ static ZGPopUpView *_popUpView_;
 - (void)drawRect:(CGRect)rect {
     
     CGContextRef context = UIGraphicsGetCurrentContext();
-    CGContextSetRGBStrokeColor(context,1,0,0,1);
+//    CGContextSetRGBStrokeColor(context,1,0,0,1);
+    UIColor *strokeColor = [UIColor redColor];
+    if (self.borderColor) {
+        strokeColor = self.borderColor;
+    }
+    CGContextSetStrokeColorWithColor(context, strokeColor.CGColor);
     CGSize  rectSize = CGSizeMake(rect.size.width - 2*popUpViewInset, rect.size.height -arrowRadius - popUpViewInset);
     
     CGFloat leftExtendDistance = rectSize.width  - rightExtendDistance - 2*(cornerRadius + arrowRadius);
