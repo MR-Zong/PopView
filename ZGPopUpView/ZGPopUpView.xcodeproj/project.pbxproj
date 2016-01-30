@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EFD144031C5CAD5500632CAE /* ZGPopUpView.gif in Resources */ = {isa = PBXBuildFile; fileRef = EFD144011C5CAD5500632CAE /* ZGPopUpView.gif */; };
+		EFD144041C5CAD5500632CAE /* ZGPopUpView2.gif in Resources */ = {isa = PBXBuildFile; fileRef = EFD144021C5CAD5500632CAE /* ZGPopUpView2.gif */; };
 		EFDCE53A1C59F48F005BA79C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EFDCE5391C59F48F005BA79C /* main.m */; };
 		EFDCE53D1C59F48F005BA79C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EFDCE53C1C59F48F005BA79C /* AppDelegate.m */; };
 		EFDCE5401C59F48F005BA79C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EFDCE53F1C59F48F005BA79C /* ViewController.m */; };
@@ -36,6 +38,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		EFD144011C5CAD5500632CAE /* ZGPopUpView.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = ZGPopUpView.gif; sourceTree = "<group>"; };
+		EFD144021C5CAD5500632CAE /* ZGPopUpView2.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = ZGPopUpView2.gif; sourceTree = "<group>"; };
 		EFDCE5351C59F48F005BA79C /* ZGPopUpView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZGPopUpView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EFDCE5391C59F48F005BA79C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		EFDCE53B1C59F48F005BA79C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -81,6 +85,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		EFD144001C5CAD5500632CAE /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				EFD144011C5CAD5500632CAE /* ZGPopUpView.gif */,
+				EFD144021C5CAD5500632CAE /* ZGPopUpView2.gif */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
 		EFDCE52C1C59F48F005BA79C = {
 			isa = PBXGroup;
 			children = (
@@ -121,6 +134,7 @@
 		EFDCE5381C59F48F005BA79C /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				EFD144001C5CAD5500632CAE /* Images */,
 				EFDCE5391C59F48F005BA79C /* main.m */,
 			);
 			name = "Supporting Files";
@@ -264,9 +278,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EFD144041C5CAD5500632CAE /* ZGPopUpView2.gif in Resources */,
 				EFDCE5481C59F48F005BA79C /* LaunchScreen.storyboard in Resources */,
 				EFDCE5451C59F48F005BA79C /* Assets.xcassets in Resources */,
 				EFDCE5431C59F48F005BA79C /* Main.storyboard in Resources */,
+				EFD144031C5CAD5500632CAE /* ZGPopUpView.gif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

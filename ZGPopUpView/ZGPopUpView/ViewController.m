@@ -34,7 +34,7 @@
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
-    NSString *message = @"宗根徐宗根徐宗根徐宗根徐宗根徐宗根徐宗根徐宗根徐宗根徐宗根徐宗根徐";
+    NSString *message = @"宗根徐宗根徐宗根徐宗根徐宗徐宗根徐宗徐宗根徐宗徐宗根徐宗徐宗根徐宗徐宗根徐宗";
     //    [ZGPopUpView showMessage:message inView:self.view rect:CGRectMake(300, 100, 50, 100)];
     [ZGPopUpView showMessage:message attributes:@{NSForegroundColorAttributeName : [UIColor yellowColor]} inView:self.view rect:self.btn.frame];
 }
