@@ -45,7 +45,9 @@ static ZGPopUpView *_popUpView_;
 
 @property (nonatomic, strong) UIFont *font;
 
-@property (nonatomic,assign) CGPoint arrowPoint;
+@property (nonatomic, assign) CGPoint arrowPoint;
+
+@property (nonatomic, assign) CGPoint startPoint;
 
 @property (nonatomic, assign) ZGPopUpViewArrowDirection arrowDirection;
 
@@ -125,9 +127,13 @@ static ZGPopUpView *_popUpView_;
     
     switch (self.showAnimationType) {
         case ZGPopUpViewShowAnimationTypeDefault:{
-            self.frame = CGRectMake(self.arrowPoint.x, self.arrowPoint.y, 0.01, 0.01);
+//            self.frame = CGRectMake(self.arrowPoint.x, self.arrowPoint.y, 0.01, 0.01);
+            self.frame = popUpViewFrame;
+//            self.layer.anchorPoint = self.startPoint;
+            self.transform = CGAffineTransformScale(self.transform, 0.1, 0.1);
             [UIView animateWithDuration:0.25 animations:^{
-                self.frame = popUpViewFrame;
+//                self.frame = popUpViewFrame;
+                self.transform = CGAffineTransformScale(self.transform, 10, 10);
             }completion:^(BOOL finished) {
                 if (self.delegate && [self.delegate respondsToSelector:@selector(popUpViewDidShow:)]) {
                     [self.delegate popUpViewDidShow:self];
@@ -228,7 +234,7 @@ static ZGPopUpView *_popUpView_;
     self.contentView = contentView;
     contentView.frame = self.bounds;
     self.backgroundColor = [UIColor clearColor];
-    self.clipsToBounds = YES;
+//    self.clipsToBounds = YES;
     self.opaque = NO;
 
 }
@@ -254,6 +260,7 @@ static ZGPopUpView *_popUpView_;
     if (self.arrowDirection == ZGPopUpViewArrowDirectionUp) {
         
         CGPoint startPoint = CGPointMake((rectSize.width + 2*popUpViewInset) - arrowRadius - rightExtendDistance - cornerRadius - popUpViewInset, 0);
+        self.startPoint = startPoint;
         CGPoint leftEndPoint = CGPointMake(startPoint.x - arrowSize.width, startPoint.y + arrowSize.height);
         
         
@@ -299,6 +306,7 @@ static ZGPopUpView *_popUpView_;
     }else if (self.arrowDirection == ZGPopUpViewArrowDirectionDown){
         
         CGPoint startPoint = CGPointMake((rectSize.width + 2*popUpViewInset) - arrowRadius - rightExtendDistance - cornerRadius - popUpViewInset, rectSize.height + arrowRadius + popUpViewInset);
+        self.startPoint = startPoint;
         CGPoint leftEndPoint = CGPointMake(startPoint.x - arrowSize.width, startPoint.y - arrowSize.height);
         
         // 箭头左边弧线
@@ -372,10 +380,13 @@ static ZGPopUpView *_popUpView_;
         }
         switch (self.showAnimationType) {
             case ZGPopUpViewShowAnimationTypeDefault:{
-                
+
                 [UIView animateWithDuration:0.25 animations:^(void)
                  {
-                     self.frame = CGRectMake(self.arrowPoint.x, self.arrowPoint.y, 0.01, 0.01);
+//                     self.frame = CGRectMake(self.arrowPoint.x, self.arrowPoint.y, 0.01, 0.01);
+                     CGAffineTransform transForm = CGAffineTransformMakeScale(0.1, 0.1);
+//                     self.layer.anchorPoint = self.startPoint;
+                     self.transform = transForm;
                  }completion:^(BOOL finish)
                  {
                      [self.maskView removeFromSuperview];
