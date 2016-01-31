@@ -100,7 +100,6 @@ static ZGPopUpView *_popUpView_;
             messageLabel.textColor = textColor;
         }
         messageLabel.font = textFont;
-        messageLabel.textColor = [UIColor grayColor];
         
         // 把内容控件添加到容器视图，在这里要显示的内容是文字Label，但也可以是其他任何控件
         [self.contentView addSubview:messageLabel];
@@ -229,6 +228,9 @@ static ZGPopUpView *_popUpView_;
     self.contentView = contentView;
     contentView.frame = self.bounds;
     self.backgroundColor = [UIColor clearColor];
+    self.clipsToBounds = YES;
+    self.opaque = NO;
+
 }
 
 
