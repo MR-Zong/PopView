@@ -128,7 +128,11 @@ static ZGPopUpView *_popUpView_;
 //            self.frame = CGRectMake(self.arrowPoint.x, self.arrowPoint.y, 0.01, 0.01);
             CGPoint startPoint = CGPointMake(popUpViewFrame.size.width - arrowRadius - rightExtendDistance - cornerRadius - popUpViewInset, 0);
             self.frame = popUpViewFrame;
-            self.layer.anchorPoint = CGPointMake(startPoint.x / self.frame.size.width, 0);
+            CGFloat anchorPointY = 0;
+            if (self.arrowDirection == ZGPopUpViewArrowDirectionDown) {
+                anchorPointY = 1;
+            }
+            self.layer.anchorPoint = CGPointMake(startPoint.x / self.frame.size.width, anchorPointY);
             self.frame = popUpViewFrame;
 
             self.transform = CGAffineTransformScale(self.transform, 0.1, 0.1);
