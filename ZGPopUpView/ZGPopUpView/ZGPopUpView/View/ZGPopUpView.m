@@ -126,30 +126,21 @@ static ZGPopUpView *_popUpView_;
     switch (self.showAnimationType) {
         case ZGPopUpViewShowAnimationTypeDefault:{
 //            self.frame = CGRectMake(self.arrowPoint.x, self.arrowPoint.y, 0.01, 0.01);
-            self.frame = popUpViewFrame;
             CGPoint startPoint = CGPointMake(popUpViewFrame.size.width - arrowRadius - rightExtendDistance - cornerRadius - popUpViewInset, 0);
- 
+            self.frame = popUpViewFrame;
             self.layer.anchorPoint = CGPointMake(startPoint.x / self.frame.size.width, 0);
-//            [UIView animateWithDuration:5 animations:^{
-            
-                self.transform = CGAffineTransformScale(self.transform, 0.1, 0.1);
-//            }completion:^(BOOL finished) {
-                
-                CGRect tmpFrame = self.frame;
-                tmpFrame.origin.x = self.arrowPoint.x - (popUpViewFrame.size.width - arrowRadius - rightExtendDistance - cornerRadius  - popUpViewInset)*0.1;
-                tmpFrame.origin.y = self.arrowPoint.y;
-                self.frame = tmpFrame;
-                
-                [UIView animateWithDuration:0.25 animations:^{
-                    //                self.frame = popUpViewFrame;
-                    self.transform = CGAffineTransformScale(self.transform, 10, 10);
-                    self.frame = popUpViewFrame;
-                }completion:^(BOOL finished) {
-                    if (self.delegate && [self.delegate respondsToSelector:@selector(popUpViewDidShow:)]) {
-                        [self.delegate popUpViewDidShow:self];
-                    }
-                }];
-//            }];
+            self.frame = popUpViewFrame;
+
+            self.transform = CGAffineTransformScale(self.transform, 0.1, 0.1);
+            [UIView animateWithDuration:0.25 animations:^{
+                //                self.frame = popUpViewFrame;
+                self.transform = CGAffineTransformScale(self.transform, 10, 10);
+                self.frame = popUpViewFrame;
+            }completion:^(BOOL finished) {
+                if (self.delegate && [self.delegate respondsToSelector:@selector(popUpViewDidShow:)]) {
+                    [self.delegate popUpViewDidShow:self];
+                }
+            }];
             break;
         }
         case ZGPopUpViewShowAnimationTypeAlpha:{
