@@ -67,7 +67,7 @@ static ZGPopUpView *_popUpView_;
          *  创建时候不指定箭头指向，默认是向上
          * ZGPopUpView *popUpView = [[self alloc] initWithArrowDirection:ZGPopUpViewArrowDirectionDown];
          */
-        ZGPopUpView *popUpView = [[self alloc] init];
+        ZGPopUpView *popUpView = [[self alloc] initWithArrowDirection:ZGPopUpViewArrowDirectionDown];
         [popUpView showMessage:message attributes:attributes inView:view rect:rect];
     }
     
@@ -183,7 +183,24 @@ static ZGPopUpView *_popUpView_;
     
     CGPoint arrowPoint = CGPointMake(arrowPointX, arrowPointY);
 
+    // rightExtendDistance
+    CGFloat rightSpace = view.bounds.size.width - arrowPoint.x;
+    if (rightSpace == view.bounds.size.width / 2.0) {
+        rightExtendDistance = (popUpViewWidth - 2 * (arrowRadius + cornerRadius)) / 2.0;
+    }else if (rightSpace > view.bounds.size.width / 2.0){
+        rightExtendDistance = popUpViewWidth - 2 * (arrowRadius + cornerRadius) - 20;
+        if (rightSpace < rightExtendDistance) {
+            rightExtendDistance = rightSpace - arrowRadius - cornerRadius - 10;
+        }
+    }else {
+        rightExtendDistance = 10;
+        if (rightSpace > rightExtendDistance) {
+            rightExtendDistance = rightSpace - arrowRadius - cornerRadius - 10;
+        }
+    }
+    
     CGRect popUpViewFrame = CGRectMake(arrowPoint.x - (popUpViewWidth - arrowRadius - rightExtendDistance - cornerRadius  - popUpViewInset) , popUpViewY, popUpViewWidth, popUpViewHeight);
+    
     
     self.arrowPoint = arrowPoint;
     self.maskView.frame = view.bounds;
