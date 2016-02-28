@@ -67,7 +67,7 @@ static ZGPopUpView *_popUpView_;
          *  创建时候不指定箭头指向，默认是向上
          * ZGPopUpView *popUpView = [[self alloc] initWithArrowDirection:ZGPopUpViewArrowDirectionDown];
          */
-        ZGPopUpView *popUpView = [[self alloc] initWithArrowDirection:ZGPopUpViewArrowDirectionDown];
+        ZGPopUpView *popUpView = [[self alloc] init];
         [popUpView showMessage:message attributes:attributes inView:view rect:rect];
     }
     
