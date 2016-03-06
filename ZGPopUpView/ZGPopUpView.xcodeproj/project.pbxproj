@@ -18,6 +18,7 @@
 		EFDCE5531C59F48F005BA79C /* ZGPopUpViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EFDCE5521C59F48F005BA79C /* ZGPopUpViewTests.m */; };
 		EFDCE55E1C59F48F005BA79C /* ZGPopUpViewUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = EFDCE55D1C59F48F005BA79C /* ZGPopUpViewUITests.m */; };
 		EFDCE56F1C59F4BC005BA79C /* ZGPopUpView.m in Sources */ = {isa = PBXBuildFile; fileRef = EFDCE56E1C59F4BC005BA79C /* ZGPopUpView.m */; };
+		EFE98C811C8C0BEB00AEF8DF /* popView效果图.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EFE98C801C8C0BEB00AEF8DF /* popView效果图.jpg */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +59,7 @@
 		EFDCE55F1C59F48F005BA79C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EFDCE56D1C59F4BC005BA79C /* ZGPopUpView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZGPopUpView.h; sourceTree = "<group>"; };
 		EFDCE56E1C59F4BC005BA79C /* ZGPopUpView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZGPopUpView.m; sourceTree = "<group>"; };
+		EFE98C801C8C0BEB00AEF8DF /* popView效果图.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "popView效果图.jpg"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +90,7 @@
 		EFD144001C5CAD5500632CAE /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				EFE98C801C8C0BEB00AEF8DF /* popView效果图.jpg */,
 				EFD144011C5CAD5500632CAE /* ZGPopUpView.gif */,
 				EFD144021C5CAD5500632CAE /* ZGPopUpView2.gif */,
 			);
@@ -279,6 +282,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EFD144041C5CAD5500632CAE /* ZGPopUpView2.gif in Resources */,
+				EFE98C811C8C0BEB00AEF8DF /* popView效果图.jpg in Resources */,
 				EFDCE5481C59F48F005BA79C /* LaunchScreen.storyboard in Resources */,
 				EFDCE5451C59F48F005BA79C /* Assets.xcassets in Resources */,
 				EFDCE5431C59F48F005BA79C /* Main.storyboard in Resources */,
